@@ -239,13 +239,23 @@ project_workoai/
 ## Future Enhancements (Bonus)
 
 - [x] JWT authentication
+- [x] Role-based access control (Admin/User)
+- [x] Metrics dashboard
+- [x] Deployment to cloud platform (Render)
 - [ ] Cloud storage for resumes (AWS S3)
-- [ ] Metrics dashboard
-- [ ] Deployment to cloud platform
 - [ ] Email notifications
 - [ ] Pagination for large datasets
 - [ ] Refresh token mechanism
 - [ ] Password reset functionality
+
+## Deployment
+
+**Backend:** Deployed on Render
+- URL: https://workoai-assignment-fgnr.onrender.com
+- MongoDB: MongoDB Atlas (Cloud)
+
+**Frontend:** Can be deployed on Vercel/Netlify
+- Update API_URL in frontend to point to deployed backend
 
 ## Testing
 
