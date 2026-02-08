@@ -8,12 +8,8 @@ A full-stack application for managing candidate referrals with React frontend an
 - Email: `admin@gmail.com`
 - Password: `admin@123`
 
-**User Accounts:**
+**User Account:**
 - Email: `user1@example.com` | Password: `password123`
-- Email: `user2@example.com` | Password: `password123`
-- Email: `user3@example.com` | Password: `password123`
-- Email: `user4@example.com` | Password: `password123`
-- Email: `user5@example.com` | Password: `password123`
 
 ## Features Implemented
 
