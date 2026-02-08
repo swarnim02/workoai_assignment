@@ -1,5 +1,10 @@
 const Candidate = require('../models/Candidate');
 
+// Role-Based Access Control (RBAC) Implementation:
+// - Users can create and view their own referrals
+// - Admins can view all referrals, update status, and delete candidates
+// - Admins cannot create referrals themselves
+
 exports.createCandidate = async (req, res) => {
   try {
     if (req.user.role === 'admin') {
