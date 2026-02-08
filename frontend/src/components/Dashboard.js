@@ -1,5 +1,11 @@
 import React from 'react';
 
+// Admin Features:
+// - View all candidates with referrer information
+// - Update candidate status (Pending/Reviewed/Hired)
+// - Delete candidates
+// Regular users can only view their own referrals
+
 function Dashboard({ candidates, onStatusUpdate, onDelete, userRole }) {
   if (candidates.length === 0) {
     return <div className="empty-state">
