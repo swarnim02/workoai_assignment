@@ -18,8 +18,7 @@ const candidateSchema = new mongoose.Schema({
     enum: ['Pending', 'Reviewed', 'Hired'],
     default: 'Pending'
   },
-  resumeData: { type: String },
-  resumeName: { type: String },
+  resumeLink: { type: String },
   referredBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 }, { timestamps: true });
 

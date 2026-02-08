@@ -27,7 +27,9 @@ function Dashboard({ candidates, onStatusUpdate, onDelete, userRole }) {
           <span className={`status-badge ${candidate.status}`}>
             {candidate.status}
           </span>
-          {candidate.resumeName && <p><strong>Resume:</strong> {candidate.resumeName}</p>}
+          {candidate.resumeLink && (
+            <p><strong>Resume:</strong> <a href={candidate.resumeLink} target="_blank" rel="noopener noreferrer">View Resume</a></p>
+          )}
           {userRole === 'admin' && (
             <div className="card-actions">
               <select

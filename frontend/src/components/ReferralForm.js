@@ -5,31 +5,12 @@ function ReferralForm({ onSubmit }) {
     name: '',
     email: '',
     phone: '',
-    jobTitle: ''
+    jobTitle: '',
+    resumeLink: ''
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      if (file.type !== 'application/pdf') {
-        alert('Only PDF files are allowed');
-        e.target.value = '';
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({
-          ...formData,
-          resumeData: reader.result,
-          resumeName: file.name
-        });
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   const handleSubmit = (e) => {
@@ -39,7 +20,7 @@ function ReferralForm({ onSubmit }) {
       return;
     }
     onSubmit(formData);
-    setFormData({ name: '', email: '', phone: '', jobTitle: '' });
+    setFormData({ name: '', email: '', phone: '', jobTitle: '', resumeLink: '' });
   };
 
   return (
@@ -88,11 +69,13 @@ function ReferralForm({ onSubmit }) {
           />
         </div>
         <div className="form-group">
-          <label>Resume (PDF only)</label>
+          <label>Resume Link</label>
           <input
-            type="file"
-            accept=".pdf"
-            onChange={handleFileChange}
+            type="url"
+            name="resumeLink"
+            value={formData.resumeLink}
+            onChange={handleChange}
+            placeholder="https://example.com/resume.pdf"
           />
         </div>
         <button type="submit" className="btn-submit">Submit Referral</button>

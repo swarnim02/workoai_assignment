@@ -11,14 +11,14 @@ exports.createCandidate = async (req, res) => {
       return res.status(403).json({ error: 'Admins cannot refer candidates' });
     }
 
-    const { name, email, phone, jobTitle, resumeData, resumeName } = req.body;
+    const { name, email, phone, jobTitle, resumeLink } = req.body;
 
     if (!name || !email || !phone || !jobTitle) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
     const candidate = new Candidate({ 
-      name, email, phone, jobTitle, resumeData, resumeName,
+      name, email, phone, jobTitle, resumeLink,
       referredBy: req.user.userId
     });
     await candidate.save();
@@ -36,7 +36,6 @@ exports.getAllCandidates = async (req, res) => {
     const query = req.user.role === 'admin' ? {} : { referredBy: req.user.userId };
     const candidates = await Candidate.find(query)
       .populate('referredBy', 'name email')
-      .select('-resumeData')
       .sort({ createdAt: -1 });
     res.json(candidates);
   } catch (error) {
@@ -59,7 +58,7 @@ exports.updateCandidateStatus = async (req, res) => {
       req.params.id,
       { status },
       { new: true }
-    ).select('-resumeData');
+    );
 
     if (!candidate) {
       return res.status(404).json({ error: 'Candidate not found' });
