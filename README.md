@@ -260,8 +260,8 @@ project_workoai/
 - URL: https://workoai-assignment-fgnr.onrender.com
 - MongoDB: MongoDB Atlas (Cloud)
 
-**Frontend:** Can be deployed on Vercel/Netlify
-- Update API_URL in frontend to point to deployed backend
+**Frontend:** deployed on Vercel
+- workoai-assignment-lydr.vercel.app
 
 ## Testing
 
@@ -283,10 +283,3 @@ Use the provided Postman collection (`postman_collection.json`) to test all API 
 lsof -ti:5001 | xargs kill -9
 ```
 
-## Author
-
-Created for Worko Assignment
-
-## License
-
-MIT
