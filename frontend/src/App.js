@@ -198,6 +198,8 @@ function App() {
             <p>Candidate Referral Management System</p>
           </div>
         ) : currentPage === 'metrics' ? (
+          // Metrics and Analytics Dashboard
+          // Displays total referrals and breakdown by status (Pending/Reviewed/Hired)
           <div className="metrics-page">
             <div className="metric-box large">
               <div className="metric-value">{candidates.length}</div>
