@@ -5,29 +5,28 @@ A full-stack application for managing candidate referrals with React frontend an
 ## Features Implemented
 
 ### Frontend (React)
-- ✅ Dashboard displaying all referred candidates
-- ✅ Search functionality by job title or status
-- ✅ Referral form with validation
-- ✅ Status update (Pending → Reviewed → Hired)
-- ✅ Delete candidate functionality
-- ✅ Resume upload (PDF only, stored as base64 in database)
-- ✅ Responsive design
-- ✅ JWT Authentication (Login/Register)
-- ✅ Protected routes
+- Dashboard displaying all referred candidates
+- Search functionality by job title or status
+- Referral form with validation
+- Status update (Pending → Reviewed → Hired)
+- Delete candidate functionality
+- Resume link input
+- Responsive design
+- JWT Authentication (Login/Register)
+- Protected routes
 
 ### Backend (Node.js + Express)
-- ✅ POST /api/auth/register - User registration
-- ✅ POST /api/auth/login - User login
-- ✅ POST /api/candidates - Create new candidate (protected)
-- ✅ GET /api/candidates - Fetch all candidates (protected)
-- ✅ PUT /api/candidates/:id/status - Update candidate status (protected)
-- ✅ DELETE /api/candidates/:id - Delete candidate (protected)
-- ✅ MongoDB (NoSQL) database
-- ✅ Email and phone validation
-- ✅ PDF file validation
-- ✅ Error handling
-- ✅ JWT token authentication
-- ✅ Password hashing with bcrypt
+- POST /api/auth/register - User registration
+- POST /api/auth/login - User login
+- POST /api/candidates - Create new candidate (protected)
+- GET /api/candidates - Fetch all candidates (protected)
+- PUT /api/candidates/:id/status - Update candidate status (protected)
+- DELETE /api/candidates/:id - Delete candidate (protected)
+- MongoDB (NoSQL) database
+- Email and phone validation
+- Error handling
+- JWT token authentication
+- Password hashing with bcrypt
 
 ## Tech Stack
 
@@ -161,8 +160,7 @@ npm start
   "email": "john@example.com",
   "phone": "1234567890",
   "jobTitle": "Software Engineer",
-  "resumeData": "base64_encoded_pdf",
-  "resumeName": "resume.pdf"
+  "resumeLink": "https://example.com/resume.pdf"
 }
 ```
 
@@ -191,7 +189,7 @@ npm start
 - **Email:** Must be valid email format
 - **Password:** Minimum 6 characters
 - **Phone:** Must be 10 digits
-- **Resume:** Only PDF files accepted
+- **Resume Link:** Optional URL field
 - **Status:** Must be one of: Pending, Reviewed, Hired
 
 ## Project Structure
@@ -228,25 +226,24 @@ project_workoai/
 
 ## Assumptions & Limitations
 
-1. **Resume Storage:** Resumes are stored as base64 in MongoDB (not cloud storage)
+1. **Resume Storage:** Resume links are stored as URLs in MongoDB
 2. **Authentication:** JWT-based authentication with 7-day token expiry
 3. **Password Security:** Passwords hashed using bcrypt with salt rounds of 10
 4. **Phone Format:** Assumes 10-digit phone numbers
-5. **File Size:** Limited to 10MB for resume uploads
-6. **Local Development:** Configured for local MongoDB instance
-7. **Token Storage:** JWT tokens stored in localStorage
+5. **Local Development:** Configured for local MongoDB instance
+6. **Token Storage:** JWT tokens stored in localStorage
 
-## Future Enhancements (Bonus)
+## Future Enhancements
 
-- [x] JWT authentication
-- [x] Role-based access control (Admin/User)
-- [x] Metrics dashboard
-- [x] Deployment to cloud platform (Render)
-- [ ] Cloud storage for resumes (AWS S3)
-- [ ] Email notifications
-- [ ] Pagination for large datasets
-- [ ] Refresh token mechanism
-- [ ] Password reset functionality
+- JWT authentication (Implemented)
+- Role-based access control (Implemented)
+- Metrics dashboard (Implemented)
+- Deployment to cloud platform (Implemented)
+- Cloud storage for resumes (AWS S3)
+- Email notifications
+- Pagination for large datasets
+- Refresh token mechanism
+- Password reset functionality
 
 ## Deployment
 

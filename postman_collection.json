@@ -72,7 +72,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"1234567890\",\n  \"jobTitle\": \"Software Engineer\",\n  \"resumeName\": \"john_resume.pdf\"\n}"
+          "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"1234567890\",\n  \"jobTitle\": \"Software Engineer\",\n  \"resumeLink\": \"https://example.com/resume.pdf\"\n}"
         },
         "url": {
           "raw": "http://localhost:3001/api/candidates",

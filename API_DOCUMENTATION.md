@@ -1,12 +1,16 @@
-# API Endpoints
+# API Documentation
 
-Base URL: `http://localhost:3001`
+## Base URL
+
+**Local:** `http://localhost:3001`
+**Production:** `https://workoai-assignment-fgnr.onrender.com`
 
 ## Authentication
 
-### Register
-`POST /api/auth/register`
+### Register User
+**Endpoint:** `POST /api/auth/register`
 
+**Request Body:**
 ```json
 {
   "name": "John Doe",
@@ -16,11 +20,23 @@ Base URL: `http://localhost:3001`
 }
 ```
 
-Returns: `{ token, user: { id, name, email, role } }`
+**Response:**
+```json
+{ 
+  "token": "jwt_token_string", 
+  "user": { 
+    "id": "user_id", 
+    "name": "John Doe", 
+    "email": "john@example.com", 
+    "role": "user" 
+  } 
+}
+```
 
-### Login
-`POST /api/auth/login`
+### Login User
+**Endpoint:** `POST /api/auth/login`
 
+**Request Body:**
 ```json
 {
   "email": "john@example.com",
@@ -28,49 +44,166 @@ Returns: `{ token, user: { id, name, email, role } }`
 }
 ```
 
-Returns: `{ token, user: { id, name, email, role } }`
+**Response:**
+```json
+{ 
+  "token": "jwt_token_string", 
+  "user": { 
+    "id": "user_id", 
+    "name": "John Doe", 
+    "email": "john@example.com", 
+    "role": "user" 
+  } 
+}
+```
 
-## Candidates (Protected - requires JWT token)
+## Candidates
 
-Add header: `Authorization: Bearer <token>`
+All candidate endpoints require JWT authentication.
+
+**Required Header:** `Authorization: Bearer <token>`
 
 ### Create Candidate
-`POST /api/candidates`
+**Endpoint:** `POST /api/candidates`
+**Access:** Users only (Admins cannot create referrals)
 
+**Request Body:**
 ```json
 {
   "name": "Jane Smith",
   "email": "jane@example.com",
   "phone": "1234567890",
   "jobTitle": "Software Engineer",
-  "resumeData": "base64_string",
-  "resumeName": "resume.pdf"
+  "resumeLink": "https://example.com/resume.pdf"
+}
+```
+
+**Response:**
+```json
+{
+  "_id": "candidate_id",
+  "name": "Jane Smith",
+  "email": "jane@example.com",
+  "phone": "1234567890",
+  "jobTitle": "Software Engineer",
+  "resumeLink": "https://example.com/resume.pdf",
+  "status": "Pending",
+  "referredBy": "user_id",
+  "createdAt": "2024-01-01T00:00:00.000Z"
 }
 ```
 
 ### Get All Candidates
-`GET /api/candidates`
+**Endpoint:** `GET /api/candidates`
+**Access:** All authenticated users
 
-Users see only their referrals. Admins see all with referrer info.
+**Behavior:**
+- Users see only their own referrals
+- Admins see all referrals with referrer information
 
-### Update Status (Admin only)
-`PUT /api/candidates/:id/status`
+**Response:**
+```json
+[
+  {
+    "_id": "candidate_id",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "phone": "1234567890",
+    "jobTitle": "Software Engineer",
+    "resumeLink": "https://example.com/resume.pdf",
+    "status": "Pending",
+    "referredBy": {
+      "_id": "user_id",
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  }
+]
+```
 
+### Update Candidate Status
+**Endpoint:** `PUT /api/candidates/:id/status`
+**Access:** Admin only
+
+**Request Body:**
 ```json
 {
   "status": "Reviewed"
 }
 ```
 
-Valid statuses: Pending, Reviewed, Hired
+**Valid Statuses:** `Pending`, `Reviewed`, `Hired`
 
-### Delete Candidate (Admin only)
-`DELETE /api/candidates/:id`
+**Response:**
+```json
+{
+  "_id": "candidate_id",
+  "name": "Jane Smith",
+  "status": "Reviewed",
+  "updatedAt": "2024-01-01T00:00:00.000Z"
+}
+```
 
-## Validation
+### Delete Candidate
+**Endpoint:** `DELETE /api/candidates/:id`
+**Access:** Admin only
 
-- Email: valid format
-- Phone: exactly 10 digits
-- Password: min 6 characters
-- Resume: PDF only
-- Role: user or admin
+**Response:**
+```json
+{
+  "message": "Candidate deleted successfully"
+}
+```
+
+## Error Responses
+
+### 400 Bad Request
+```json
+{
+  "error": "All fields are required"
+}
+```
+
+### 401 Unauthorized
+```json
+{
+  "error": "No token provided" 
+}
+```
+
+### 403 Forbidden
+```json
+{
+  "error": "Only admins can update status"
+}
+```
+
+### 404 Not Found
+```json
+{
+  "error": "Candidate not found"
+}
+```
+
+### 500 Server Error
+```json
+{
+  "error": "Server error"
+}
+```
+
+## Validation Rules
+
+### User Registration/Login
+- **Name:** Required, string
+- **Email:** Required, valid email format
+- **Password:** Required, minimum 6 characters
+- **Role:** Optional, either "user" or "admin" (defaults to "user")
+
+### Candidate Creation
+- **Name:** Required, string
+- **Email:** Required, valid email format
+- **Phone:** Required, exactly 10 digits
+- **Job Title:** Required, string
+- **Resume Link:** Optional, valid URL format
