@@ -4,6 +4,8 @@ import Dashboard from './components/Dashboard';
 import ReferralForm from './components/ReferralForm';
 import Auth from './components/Auth';
 
+const API_URL = 'https://workoai-assignment-fgnr.onrender.com';
+
 function App() {
   const [candidates, setCandidates] = useState([]);
   const [filteredCandidates, setFilteredCandidates] = useState([]);
@@ -43,7 +45,7 @@ function App() {
 
   const fetchCandidates = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/candidates', {
+      const response = await fetch(`${API_URL}/api/candidates`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {
@@ -59,7 +61,7 @@ function App() {
 
   const handleAddCandidate = async (candidateData) => {
     try {
-      const response = await fetch('http://localhost:3001/api/candidates', {
+      const response = await fetch(`${API_URL}/api/candidates`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -81,7 +83,7 @@ function App() {
 
   const handleStatusUpdate = async (id, status) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/candidates/${id}/status`, {
+      const response = await fetch(`${API_URL}/api/candidates/${id}/status`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
@@ -100,7 +102,7 @@ function App() {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this candidate?')) {
       try {
-        const response = await fetch(`http://localhost:3001/api/candidates/${id}`, {
+        const response = await fetch(`${API_URL}/api/candidates/${id}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` }
         });

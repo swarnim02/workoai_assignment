@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+const API_URL = 'https://workoai-assignment-fgnr.onrender.com';
+
 function Auth({ onAuthSuccess }) {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'user' });
@@ -16,7 +18,7 @@ function Auth({ onAuthSuccess }) {
       : formData;
 
     try {
-      const response = await fetch(`http://localhost:3001/api/auth/${endpoint}`, {
+      const response = await fetch(`${API_URL}/api/auth/${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
