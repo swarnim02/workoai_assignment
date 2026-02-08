@@ -58,7 +58,7 @@ body {
 }
 
 .btn-primary {
-  background: #007bff;
+  background: #6c757d;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -68,7 +68,7 @@ body {
 }
 
 .btn-primary:hover {
-  background: #0056b3;
+  background: #5a6268;
 }
 
 .search-bar {
@@ -117,11 +117,11 @@ body {
 
 .form-group input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #6c757d;
 }
 
 .btn-submit {
-  background: #28a745;
+  background: #6c757d;
   color: white;
   border: none;
   padding: 12px 30px;
@@ -132,7 +132,7 @@ body {
 }
 
 .btn-submit:hover {
-  background: #218838;
+  background: #5a6268;
 }
 
 .dashboard {
@@ -249,7 +249,7 @@ body {
 }
 
 .auth-toggle span {
-  color: #007bff;
+  color: #6c757d;
   cursor: pointer;
   font-weight: 600;
 }
@@ -270,7 +270,7 @@ body {
 
 .form-group select:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #6c757d;
 }
 
 .btn-secondary {
@@ -307,7 +307,7 @@ body {
 
 .search-input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #6c757d;
 }
 
 .filter-dropdown {
@@ -322,7 +322,7 @@ body {
 
 .filter-dropdown:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #6c757d;
 }
 
 .nav-link {
@@ -338,13 +338,13 @@ body {
 }
 
 .nav-link:hover {
-  color: #007bff;
+  color: #6c757d;
   background: #f8f9fa;
 }
 
 .nav-link.active {
-  color: #007bff;
-  background: #e7f3ff;
+  color: #6c757d;
+  background: #e9ecef;
   font-weight: 600;
 }
 
