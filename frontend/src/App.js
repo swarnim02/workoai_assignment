@@ -17,32 +17,6 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || 'null'));
 
-  useEffect(() => {
-    if (token) {
-      fetchCandidates();
-    }
-  }, [token]);
-
-  useEffect(() => {
-    let filtered = candidates;
-    
-    // Filter by search term
-    if (searchTerm) {
-      filtered = filtered.filter(c =>
-        c.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        c.email.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-    
-    // Filter by status
-    if (statusFilter !== 'All') {
-      filtered = filtered.filter(c => c.status === statusFilter);
-    }
-    
-    setFilteredCandidates(filtered);
-  }, [searchTerm, statusFilter, candidates]);
-
   const fetchCandidates = async () => {
     try {
       const response = await fetch(`${API_URL}/api/candidates`, {
@@ -58,6 +32,31 @@ function App() {
       console.error('Error fetching candidates:', error);
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      fetchCandidates();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
+
+  useEffect(() => {
+    let filtered = candidates;
+    
+    if (searchTerm) {
+      filtered = filtered.filter(c =>
+        c.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        c.email.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    
+    if (statusFilter !== 'All') {
+      filtered = filtered.filter(c => c.status === statusFilter);
+    }
+    
+    setFilteredCandidates(filtered);
+  }, [searchTerm, statusFilter, candidates]);
 
   const handleAddCandidate = async (candidateData) => {
     try {
